@@ -67,7 +67,6 @@ class APIRequest{
 //        if ($this->zoopBase->getPublishableKey() == null) {
 //            throw new ZoopAuthenticationException("Publishable key não configurada. Verifique seu arquivo de configurações em 'resources/config/config.php'");
 //        }
-
         list($response_body, $response_code) = $this->requestWithCURL($method, $url, $headers, $data);
 
         $response = json_decode($response_body);
@@ -130,6 +129,7 @@ class APIRequest{
         $opts[CURLOPT_RETURNTRANSFER] = true;
         $opts[CURLOPT_CONNECTTIMEOUT] = 30;
         $opts[CURLOPT_TIMEOUT] = 80;
+        $opts[CURLINFO_HEADER_OUT] = true;
         $opts[CURLOPT_HTTPHEADER] = $headers;
 
         $opts[CURLOPT_SSL_VERIFYHOST] = 2;
@@ -140,7 +140,7 @@ class APIRequest{
 
         $response_body = curl_exec($curl);
         $response_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
+        
         curl_close($curl);
 
         return Array($response_body, $response_code);

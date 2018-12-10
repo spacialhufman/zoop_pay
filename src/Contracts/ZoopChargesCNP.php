@@ -48,6 +48,4 @@ interface ZoopChargesCNP{
      * @param $get array || null
      */
     public function getAll($get = null);
-
-    public function getAllBySeller($seller_id, $get = null);
 }

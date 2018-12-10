@@ -2,7 +2,7 @@
 
 namespace Zoop\Lib;
 
-class ZoopChargesCNP implements \Zoop\Contracts\ZoopChargesCNP {
+class ZoopTransactions implements \Zoop\Contracts\ZoopTransactions {
 
     /**
      * API Resource
@@ -12,7 +12,7 @@ class ZoopChargesCNP implements \Zoop\Contracts\ZoopChargesCNP {
     protected $APIResource;
 
     /**
-     * ZoopChargesCNP constructor.
+     * ZoopTransactions constructor.
      * @param APIResource $APIResource
      */
     public function __construct(APIResource $APIResource){
@@ -30,22 +30,11 @@ class ZoopChargesCNP implements \Zoop\Contracts\ZoopChargesCNP {
 
     /**
      * @param string $transactionID
-     * @param array $post
      * @return mixed
      */
-    public function cancel($transactionID, $post){
-        $api = 'transactions/' . $transactionID . '/void';
-        return $this->APIResource->createAPI($api, $post);
-    }
-
-    /**
-     * @param string $transactionID
-     * @param array $post
-     * @return mixed
-     */
-    public function capture($transactionID, $post){
-        $api = 'transactions/' . $transactionID . '/capture';
-        return $this->APIResource->createAPI($api, $post);
+    public function delete($transactionID){
+        $api = 'transactions/' . $transactionID;
+        return $this->APIResource->deleteAPI($api);
     }
 
     /**
@@ -58,15 +47,11 @@ class ZoopChargesCNP implements \Zoop\Contracts\ZoopChargesCNP {
     }
 
     /**
-     * @param $get array || null
      * @return mixed
      */
-    public function getAll($get = null){
-        if(!is_null($get)){
-            $api = 'transactions?' . http_build_query($get);
-        }else{
-            $api = 'transactions';
-        }
+    public function getAll(){
+        $api = 'transactions';
         return $this->APIResource->searchAPI($api);
     }
+
 }

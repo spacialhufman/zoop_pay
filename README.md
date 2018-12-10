@@ -1,30 +1,24 @@
 # ZOOP Laravel
 
-Zoop-laravel is a package for **Laravel 5.3+**, which consumes ZOOP payments api's.
-> Statistics  
-[![Latest Stable Version](https://poser.pugx.org/adhenrique/zoop/version)](https://packagist.org/packages/adhenrique/zoop)
-[![Total Downloads](https://poser.pugx.org/adhenrique/zoop/downloads)](https://packagist.org/packages/adhenrique/zoop)
-[![Latest Unstable Version](https://poser.pugx.org/adhenrique/zoop/v/unstable)](//packagist.org/packages/adhenrique/zoop)
-[![License](https://poser.pugx.org/adhenrique/zoop/license)](https://packagist.org/packages/adhenrique/zoop)
-
+Zoop-laravel is a package for **Laravel 5.6**, which consumes ZOOP payments api's.
 ## Requeriments
 
-* Laravel 5.3+
-* PHP 5.6+
+* Laravel 5.6
+* PHP 7.1
 * PHP ext-curl
 * PHP ext-json
 * PHP ext-mbstring
 
 
 ## Instalation
-### 1 - Composer require
+### 1 - Composer instalation
 Use composer to install the package and automatically update `composer.json`, running:
 
 ~~~
-composer require adhenrique/zoop
+composer require spacialhufman/zoop_pay
 ~~~
 
-### 2 - Update Laravel configuration
+### 2 - Configuration
 Update your application configuration to register the package in `config/app.php` adding the following line in `'providers'` section:
 
 ~~~
@@ -57,40 +51,14 @@ namespace App\Http\Controllers;
  
 use Zoop\src\Facades\ZoopTokens;
  
-class HomeController extends Controller{
+class PaymentController extends Controller{
     $ccToken = ZoopTokens::tokenizeCard([
-        'holder_name' => 'Makeda Swasey',
-        'expiration_month' => "12",
-        'expiration_year' => "2015",
-        'security_code' => "373",
-        'card_number' => "4532395075641483",
+        'holder_name' => 'John Doe',
+        'expiration_month' => "03",
+        'expiration_year' => "2023",
+        'security_code' => "123",
+        'card_number' => "4556629972668582",
     ]);
-    
-    dd($ccToken);
-}
-```
-
-### 2 - Creating a new Individual Seller
-**In your Controller**
-```php
-namespace App\Http\Controllers;
- 
-use Zoop\src\Facades\ZoopSellers;
- 
-class HomeController extends Controller{
-    $individualSeller = ZoopSellers::create([
-        'first_name' => 'Rodrigo',
-        'last_name' => "Miranda",
-        'email' => "rodrigo@pagzoop.com",
-        'phone_number' => "+12195465432",
-        'ssn_last4_digits' => "7551",
-        'birthdate' => "1983-09-11",
-        'website' => "http://pagzoop.com",
-        'facebook' => "https://www.facebook.com/rodrigo",
-        'twitter' => "http://twitter.com/hypercreative",
-    ]);
-    
-    dd($individualSeller);
 }
 ```
 
@@ -101,15 +69,13 @@ namespace App\Http\Controllers;
  
 use Zoop\src\Facades\ZoopBuyers;
  
-class HomeController extends Controller{
+class PaymentController extends Controller{
     $buyer = ZoopBuyers::create([
-        'first_name' => 'Fabiano',
-        'last_name' => 'Cruz',
-        'description' => 'Comprador de teste',
-        'email' => 'fabiano@example.com',
+        'first_name'  => 'John',
+        'last_name'   => 'Doe',
+        'description' => 'Test buyer',
+        'email'       => 'johndoe@example.com',
     ]);
-    
-    dd($buyer);
 }
 ```
 
@@ -120,20 +86,18 @@ namespace App\Http\Controllers;
  
 use Zoop\src\Facades\ZoopChargeCNP;
  
-class HomeController extends Controller{
-    $cnp = ZoopChargesCNP::create([
-        'currency' => 'BRL',
-        'amount' => '100',
+class PaymentController extends Controller{
+    $charge = ZoopChargesCNP::create([
+        'currency'     => 'BRL',
+        'amount'       => '100',
         'payment_type' => 'credit',
-        'description' => 'Venda de teste, somente!',
-        'statement_descriptor' => 'Descrição de testes',
+        'description'  => 'For test purpose, only',
+        'statement_descriptor' => 'Test description',
         'on_behalf_of' => 'bb2a51f1c22a4c30b6bf6819be87ac52',
         'installment_plan[mode]' => 'interest_free',
         'installment_plan[number_installments]' => '1',
         'customer' => 'bb2a51f1c22a4c30b6bf6819be87ac52', //buyer ud
     ]);
-    
-    dd($cnp);
 }
 ```
 

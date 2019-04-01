@@ -9,13 +9,18 @@
         "e-commerce",
         "PDV",
         "Wispot",
-        "Myguest"
+        "Myguest",
+        "Sending"
     ],
     "license": "MIT",
     "authors": [
         {
             "name": "Adenilton Henrique Ribeiro",
             "email": "adhenriquemusic@gmail.com"
+        },
+        {
+            "name": "Lucas Hufman Barbosa Feitosa",
+            "email": "lucashufman@gmail.com"
         }
     ],
     "require": {

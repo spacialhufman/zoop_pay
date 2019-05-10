@@ -108,12 +108,12 @@ class APIRequest{
         $opts = Array();
 
         if(strtolower($method) == 'file'){
-            $opts[CURLOPT_POST] = 1;
+            $opts[CURLOPT_POST]       = 1;
             $opts[CURLOPT_POSTFIELDS] = $data;
         }
 
         if (strtolower($method) == "post") {
-            $opts[CURLOPT_POST] = 1;
+            $opts[CURLOPT_POST]       = 1;
             $opts[CURLOPT_POSTFIELDS] = http_build_query($data);
         }
 
@@ -121,16 +121,16 @@ class APIRequest{
 
         if (strtolower($method) == "put") {
             $opts[CURLOPT_CUSTOMREQUEST] = 'PUT';
-            $opts[CURLOPT_POSTFIELDS] = http_build_query($data);
+            $opts[CURLOPT_POSTFIELDS]    = http_build_query($data);
         }
 
-        $opts[CURLOPT_URL] = $url;
-        $opts[CURLOPT_USERPWD] = $this->zoopBase->getPublishableKey();
+        $opts[CURLOPT_URL]            = $url;
+        $opts[CURLOPT_USERPWD]        = $this->zoopBase->getPublishableKey();
         $opts[CURLOPT_RETURNTRANSFER] = true;
         $opts[CURLOPT_CONNECTTIMEOUT] = 30;
-        $opts[CURLOPT_TIMEOUT] = 80;
-        $opts[CURLINFO_HEADER_OUT] = true;
-        $opts[CURLOPT_HTTPHEADER] = $headers;
+        $opts[CURLOPT_TIMEOUT]        = 80;
+        $opts[CURLINFO_HEADER_OUT]    = true;
+        $opts[CURLOPT_HTTPHEADER]     = $headers;
 
         $opts[CURLOPT_SSL_VERIFYHOST] = 2;
         $opts[CURLOPT_SSL_VERIFYPEER] = false;
@@ -163,8 +163,8 @@ class APIRequest{
             case "get":
             case "delete":
                 $paramsInURL = ZoopUtilities::arrayToParams($data);
-                $data = null;
-                $url = (strpos($url,"?")) ? $url . "&" . $paramsInURL : $url . "?" . $paramsInURL;
+                $data        = null;
+                $url         = (strpos($url,"?")) ? $url . "&" . $paramsInURL : $url . "?" . $paramsInURL;
                 break;
             case "post":
             case "put":

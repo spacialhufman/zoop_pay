@@ -71,7 +71,7 @@ class APIResource{
      * @throws ZoopException
     */
     public function fileAPI($api, $files){
-        $url = $this->zoopBase->getUrl() . $this->zoopBase->getMarketplaceId() . '/' . $api;
+        $url       = $this->zoopBase->getUrl() . $this->zoopBase->getMarketplaceId() . '/' . $api;
         $mimeTypes = [
             'application/pdf',
             'image/jpeg',
@@ -82,14 +82,14 @@ class APIResource{
             if(is_array($files)){
                 throw new ZoopException('You can only upload one file per request! Array given...');
             }else{
-                if(filesize($files) > 250000) throw new ZoopException('You can only send files with 250 kbytes of size.');
+                // if(filesize($files) > 250000) throw new ZoopException('You can only send files with 250 kbytes of size.');
 
-                if(!is_file($files)) throw new ZoopException('Looks like this is not a file...');
+                // if(!is_file($files)) throw new ZoopException('Looks like this is not a file...');
 
-                if(!in_array(mime_content_type($files), $mimeTypes)) throw new ZoopException('You can only send files of types "jpg, png, pdf"!');
+                // if(!in_array(mime_content_type($files), $mimeTypes)) throw new ZoopException('You can only send files of types "jpg, png, pdf"!');
 
                 return $this->APIRequest->request('FILE', $url, $this->zoopBase->getHeaders(), [
-                    'file' => new \CURLFile($files ,'' , uniqid()),
+                    'file'     => new \CURLFile($files ,'' , uniqid()),
                     'category' => 'identification'
                 ]);
             }

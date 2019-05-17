@@ -69,4 +69,18 @@ class ZoopChargesCNP implements \Zoop\Contracts\ZoopChargesCNP {
         }
         return $this->APIResource->searchAPI($api);
     }
+
+    /**
+     * @param $seller_id int
+     * @param $get array || null
+     * @return mixed
+     */
+    public function getAllBySeller($seller_id, $get = null) {
+        if (!is_null($get)) {
+            $api= 'sellers/'.$seller_id.'/transactions?'.http_build_query($get);
+        } else {
+            $api= 'sellers/'.$seller_id.'/transactions';
+        }
+        return $this->APIResource->searchAPI($api);
+    }
 }

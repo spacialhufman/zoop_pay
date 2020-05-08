@@ -67,4 +67,12 @@ interface ZoopSellers{
      * @param $sellerID string
     */
     public function getAllDocs($sellerID);
+
+
+    /**
+     * Get all bank accounts from a given Seller
+     *
+     * @param $sellerID string
+    */
+    public function getBankAccounts($sellerID);
 }

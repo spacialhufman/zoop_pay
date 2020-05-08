@@ -90,4 +90,14 @@ class ZoopSellers implements \Zoop\Contracts\ZoopSellers {
         $api = 'sellers/' . $sellerID . '/documents';
         return $this->APIResource->searchAPI($api);
     }
+
+    /**
+     * @param $sellerID string
+     *
+     * @return mixed
+    */
+    public function getBankAccounts($sellerID){
+        $api = 'sellers/' . $sellerID . '/balances';
+        return $this->APIResource->searchAPI($api);
+    }
 }

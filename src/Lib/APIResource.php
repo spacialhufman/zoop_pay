@@ -92,7 +92,7 @@ class APIResource{
                     'file'     => new \CURLFile($files['file'], $files['mimetype'], uniqid()),
                     'category' => 'identification'
                 ]);
-            }
+            // }
 
         } catch (ZoopException $e) {
             throw new ZoopException($e->getMessage());

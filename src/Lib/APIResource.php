@@ -90,7 +90,7 @@ class APIResource{
 
                 return $this->APIRequest->request('FILE', $url, $this->zoopBase->getHeaders(), [
                     'file'     => new \CURLFile($files['file'], $files['mimetype'], uniqid()),
-                    'category' => 'identification'
+                    'category' => $files['category']
                 ]);
             // }
 
